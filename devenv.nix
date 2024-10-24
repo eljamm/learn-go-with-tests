@@ -20,6 +20,7 @@
     go-tools
     gotestsum
     gotools
+    (callPackage ./gotestdox.nix { })
   ];
 
   languages.go.enable = true;
@@ -33,6 +34,11 @@
     # run tests in the current directory (all from root)
     tt.exec = ''
       gotestsum --format testname "$@"
+    '';
+
+    # run tests in the current directory (as readable documentation)
+    td.exec = ''
+      gotestdox ./... "$@"
     '';
 
     # watch go files and test on changes
