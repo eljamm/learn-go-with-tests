@@ -20,7 +20,7 @@
     go-tools
     gotestsum
     gotools
-    (callPackage ./gotestdox.nix { })
+    gotestdox
   ];
 
   languages.go.enable = true;
