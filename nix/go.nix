@@ -10,12 +10,7 @@ rec {
       with pkgs;
       [
         go
-
-        # Formatting
         format.formatter
-        gofumpt
-        goimports-reviser
-        golines
 
         # LSP
         delve # debugger
@@ -50,6 +45,6 @@ rec {
       gotestsum --format testname "$@"
     '';
 
-    format = format.formatter;
+    fmt = format.formatter;
   };
 }

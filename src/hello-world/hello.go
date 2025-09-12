@@ -34,7 +34,7 @@ func greetingPrefix(language string) (prefix string) {
 	default:
 		prefix = enHello
 	}
-	return
+	return prefix
 }
 
 func main() {

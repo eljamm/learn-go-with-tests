@@ -70,5 +70,5 @@ func (s *SpyCountdownOperations) Sleep() {
 
 func (s *SpyCountdownOperations) Write(p []byte) (n int, err error) {
 	s.Calls = append(s.Calls, write)
-	return
+	return n, err
 }
