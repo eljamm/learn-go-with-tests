@@ -45,6 +45,6 @@ rec {
       gotestsum --format testname "$@"
     '';
 
-    fmt = format.formatter;
+    ff = format.formatter;
   };
 }
