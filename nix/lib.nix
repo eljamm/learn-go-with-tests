@@ -5,11 +5,19 @@
 }:
 rec {
   attrsToApp =
-    attrs:
-    (writeShellApplication {
-      name = attrs.name;
-      text = if (lib.isAttrs attrs.value) then attrs.value.text else attrs.value + " \"$@\"";
-      runtimeInputs = if (lib.isAttrs attrs.value) then attrs.value.runtimeInputs or [ ] else [ ];
-    });
-  mkAliases = aliases: map attrsToApp (lib.attrsToList aliases);
+    name: value:
+    writeShellApplication {
+      inherit name;
+      text = value.text or (value + " \"$@\"");
+      runtimeInputs = value.runtimeInputs or [ ];
+    };
+
+  mkAliases = aliases: lib.attrValues (lib.mapAttrs attrsToApp aliases);
+
+  mkApps =
+    apps:
+    lib.mapAttrs (name: value: {
+      type = "app";
+      program = attrsToApp name value;
+    }) apps;
 }

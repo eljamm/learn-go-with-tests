@@ -1,0 +1,17 @@
+variables:
+- name: nixpkgs_version
+  default_value: unstable
+- name: nixpkgs_version__idx
+  default_value: 1
+- name: nixpkgs_version__label
+  default_value: Unstable
+- name: template_name
+  default_value: go
+- name: template_name__idx
+  default_value: 2
+- name: template_name__label
+  default_value: go
+sources:
+- uri: /tmp/ffizer-go/templates/go
+  rev: master
+  subfolder: null
