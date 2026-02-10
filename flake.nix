@@ -2,11 +2,8 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
-
     treefmt-nix.url = "github:numtide/treefmt-nix";
     treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
-    git-hooks.url = "github:fricklerhandwerk/git-hooks";
-    git-hooks.flake = false;
   };
 
   # import flake attributes from ./flake/default.nix

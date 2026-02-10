@@ -18,29 +18,13 @@
         "type": "github"
       }
     },
-    "git-hooks": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1717587264,
-        "narHash": "sha256-sNM1ENRcMkhr3QUCb+izRMkswzvVKF3K69fsJ5sexfk=",
-        "owner": "fricklerhandwerk",
-        "repo": "git-hooks",
-        "rev": "f925267ca7c5ac711b881e125227c8f3b414ca94",
-        "type": "github"
-      },
-      "original": {
-        "owner": "fricklerhandwerk",
-        "repo": "git-hooks",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1757487488,
-        "narHash": "sha256-zwE/e7CuPJUWKdvvTCB7iunV4E/+G0lKfv4kk/5Izdg=",
+        "lastModified": 1770562336,
+        "narHash": "sha256-ub1gpAONMFsT/GU2hV6ZWJjur8rJ6kKxdm9IlCT0j84=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "ab0f3607a6c7486ea22229b92ed2d355f1482ee0",
+        "rev": "d6c71932130818840fc8fe9509cf50be8c64634f",
         "type": "github"
       },
       "original": {
@@ -53,7 +37,6 @@
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "git-hooks": "git-hooks",
         "nixpkgs": "nixpkgs",
         "treefmt-nix": "treefmt-nix"
       }
@@ -80,11 +63,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1756662192,
-        "narHash": "sha256-F1oFfV51AE259I85av+MAia221XwMHCOtZCMcZLK2Jk=",
+        "lastModified": 1770228511,
+        "narHash": "sha256-wQ6NJSuFqAEmIg2VMnLdCnUc0b7vslUohqqGGD+Fyxk=",
         "owner": "numtide",
         "repo": "treefmt-nix",
-        "rev": "1aabc6c05ccbcbf4a635fb7a90400e44282f61c4",
+        "rev": "337a4fe074be1042a35086f15481d763b8ddc0e7",
         "type": "github"
       },
       "original": {
