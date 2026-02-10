@@ -29,7 +29,7 @@ rec {
     hardeningDisable = [ "fortify" ];
   };
 
-  aliases = devLib.mkAliases {
+  aliases = devLib.mkAliases rec {
     # run tests in the current directory (as readable documentation)
     td = ''
       gotestdox ./... "$@"
@@ -46,5 +46,8 @@ rec {
     '';
 
     ff = formatter.package;
+
+    # (convenience)
+    go-test = tt;
   };
 }
