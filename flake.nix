@@ -9,11 +9,22 @@
     git-hooks.flake = false;
   };
 
+  # import flake attributes from ./flake/default.nix
   outputs =
     { self, ... }@inputs:
-    inputs.flake-utils.lib.eachDefaultSystem (
-      system:
-      # get flake attributes from default.nix
-      (import ./default.nix { inherit self inputs system; }).flake
-    );
+    let
+      inherit (inputs.flake-utils.lib)
+        eachDefaultSystem
+        eachDefaultSystemPassThrough
+        ;
+
+      importFlake = arg: (system: (import ./. { inherit self inputs system; }).flake.${arg} or { });
+
+      # independant of system (e.g. nixosModules)
+      systemAgnosticFlake = eachDefaultSystemPassThrough (importFlake "systemAgnostic");
+
+      # depends on system (e.g. packages.x86_64-linux)
+      perSystemFlake = eachDefaultSystem (importFlake "perSystem");
+    in
+    systemAgnosticFlake // perSystemFlake;
 }

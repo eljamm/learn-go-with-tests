@@ -1,7 +1,9 @@
 {
-  self ? import ./nix/utils/import-flake.nix {
-    src = ./.;
-  },
+  flake-inputs ? import (fetchTarball {
+    url = "https://github.com/fricklerhandwerk/flake-inputs/tarball/4.1.0";
+    sha256 = "1j57avx2mqjnhrsgq3xl7ih8v7bdhz1kj3min6364f486ys048bm";
+  }),
+  self ? flake-inputs.import-flake { src = ./.; },
   inputs ? self.inputs,
   system ? builtins.currentSystem,
   pkgs ? import inputs.nixpkgs {
@@ -12,39 +14,29 @@
   lib ? import "${inputs.nixpkgs}/lib",
 }:
 let
-  args = {
+  default = lib.makeScope pkgs.newScope (def: {
     inherit
       lib
       pkgs
       self
       system
       inputs
+      flake
+      default # recurse scope
       ;
-    inherit (default)
-      format
-      packages
-      go
-      ;
-    devLib = default.legacyPackages.lib;
-    devShells = default.shells;
-  };
 
-  default = rec {
-    format = import ./nix/formatter.nix args;
-    go = import ./nix/go.nix args;
+    devLib = def.callPackage ./nix/lib.nix { };
+    formatter = def.callPackage ./nix/formatter.nix { };
+    shells = def.callPackage ./nix/shells.nix { };
 
-    legacyPackages.lib = pkgs.callPackage ./nix/lib.nix { };
-    packages = { };
-    shells = go.shells or { };
+    go = def.callPackage ./nix/go.nix { };
 
-    inherit flake;
-  };
+    overlays.default = final: prev: def.devPkgs;
+  });
 
-  flake = {
-    inherit (default) legacyPackages;
-    inherit (default.format) formatter;
-    devShells = default.shells;
-    packages = lib.filterAttrs (n: v: lib.isDerivation v) default.packages;
-  };
+  flake = default.callPackage ./nix/flake { };
+
+  # return final scope, with computed and non-recursive attributes
+  finalScope = default.packages default;
 in
-default // args
+finalScope

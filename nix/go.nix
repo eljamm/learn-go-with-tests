@@ -1,16 +1,16 @@
 {
   pkgs,
   devLib,
-  format,
+  formatter,
   ...
-}@args:
+}:
 rec {
   shells.default = pkgs.mkShell {
     packages =
       with pkgs;
       [
         go
-        format.formatter
+        formatter.package
 
         # LSP
         delve # debugger
@@ -45,6 +45,6 @@ rec {
       gotestsum --format testname "$@"
     '';
 
-    ff = format.formatter;
+    ff = formatter.package;
   };
 }
