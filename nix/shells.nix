@@ -5,7 +5,7 @@
   ...
 }:
 {
-  devShells.default = pkgs.mkShellNoCC {
+  default = pkgs.mkShellNoCC {
     inputsFrom = [
       default.go.shells.default
       formatter.shell
